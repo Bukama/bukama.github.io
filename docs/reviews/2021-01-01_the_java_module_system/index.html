@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Nicolai Parlog - The Java Module System - Running Java</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Running Java</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../posts/" class="nav-link">Posts</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../" class="nav-link">Reviews</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About Me</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../run/" class="nav-link">Running</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#nicolai-parlog-the-java-module-system" class="nav-link">Nicolai Parlog - The Java Module System</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="nicolai-parlog-the-java-module-system">Nicolai Parlog - The Java Module System</h1>
+<p><em>This is a translation of <a href="https://www.amazon.de/gp/customer-reviews/R1AXDR9Z7AOKYK/ref=cm_cr_dp_d_rvw_ttl?ie=UTF8&amp;ASIN=1617294284">my (German) Amazon review</a> I wrote in August 2019</em> </p>
+<p>Before I read this book, the only thing I knew about the JPMS was, that <a href="https://openjdk.java.net/projects/jigsaw/"><em>"Project Jigsaw"</em></a> was one of the biggest changes in the Java ecosystem, if not the biggest one and has something to do only have on JAR file, which contains exactly what you really need and not a bunch of things you don't.
+As I only have to deal with Java 8 at my work (and most probably will for a long time), I never dive into the details of Jigsaw.
+At some time I realized that it has something to do with modularization and my interest was drawn.
+I started to read further about the topic, because I wanted to know how this should work (also downward compatible) and if there would be some kind of dependency-management like when using <em>Maven</em>.
+I knew that <a href="https://nipafx.dev/">Nicolai</a> was writing a book about the module system and I decided to take this book to come in touch with the topic.
+One reason to choose this book was that I knew Nicolai from the <a href="https://www.javaland.eu">Javaland conference</a>, where he gave a great talk about how to document your code.
+I don't regret my decision at no time.</p>
+<p>The book boasts a very good structure, an easy-to-understand style of writing, and with comprehensible examples.
+All this is substantiated with numerous images and code snippets.
+For those, who don't only want to read the book, but also want to try the examples and commands, can do this by downloading and using the corresponding Github project.</p>
+<p>At the beginning Nicolai introduces the problematic in a very understandable way and describes the motivation and challenges of the JPMS.
+After that he explains the basics of the JPMS and slowly rises the topic's complexity - without leaving hopelessly the behind.
+Nicolais does not describe the JPMS in some straight-forward kind of documentation, but looks over the rim of a tea cup to describe the motivation behind it.
+He also rises several "Why not just doing it this way? Wouldn't that be possible?" questions, but of course answers them immediately.
+The book also contains the differentiation of the JPMS to build-tools like <em>Maven</em> or <em>Gradle</em>, to show that those tools don't have much in common with the JPMS as you might expect. </p>
+<p>After the excellent introduction, at which end the reader not only understands the JPMS, but also knows how to define and use modules, a long, practical oriented part.
+In this part the reader learns countless hints, about pitfalls and possible problems which can occur when changing to Java 9+, but also solutions to solve / avoid them.
+These topics are not only described when using a Java 9+ JDK, but also for migrating small and large applications.
+I don't know when I personally will be confronted with the migration to Java 9+ at my job, but I already know that Nicolai's book will have a permanent slot at my desk, so I can read up things everytime I need to.</p>
+<p>This is another strength of the book!
+You don't have to read it from the beginning to the end.
+You are free to choose your own path through the book, depending on how much you already know, when you are only interested in a specific topic / problem, or if you <em>"need to know some oddities of the module system, because you are invited to a party to make some conversions there"</em>.
+As an absolute novice, I focused on topics about the fundamentals and how to use the JPMS.
+I read the chapters about migrating applications with focussing on problems and pitfalls and I will (as already written) capture the solutions described in the book.  </p>
+<p>The book gets completed with a meaningful appendix, in which basics of topics related to the JPMS (e.g. the Java class-path) are described briefly and to the point, but still easy to understand.
+This saves the reader from the need to search for and dig through related writing or websites, when he forgets about something.</p>
+<p>After reading the book, I now can imagine that thousands of heads must have blown up during <em>"Project Jigsaw"</em> with all those problems, challenges and complex situations, and I absolutely raise my hat to the implementation!
+At the same time I'm happy that Nicolai presents its complexity in an extremely understandable way in this book, so that people like me don't have fear the JPMS.
+Thank you, Nicolai!</p>
+<p><strong>Further information</strong></p>
+<ul>
+<li>Author: Nicolai Parlog</li>
+<li>Title: The Java Module System</li>
+<li>ISBN-10 : 1617294284</li>
+<li>ISBN-13 : 978-1617294280</li>
+<li>Personal rating: ⭐⭐⭐⭐⭐</li>
+</ul></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
