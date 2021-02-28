@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>CRISPy  builds - Running Java</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/docco.min.css">
+
+        <script src="../../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">Running Java</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href="../.." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../" class="nav-link">Posts</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../reviews/" class="nav-link">Reviews</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../about/" class="nav-link">About Me</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../../run/" class="nav-link">Running</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#crispy-builds" class="nav-link">CRISPy  builds</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#open-range-version-intervals" class="nav-link">Open range version intervals</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#the-crisp-principle" class="nav-link">The CRISP principle</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            
+            <li class="nav-item" data-level="1"><a href="#future-oriented-builds" class="nav-link">Future oriented builds</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="crispy-builds">CRISPy  builds</h1>
+<p>I don't listen too many podcasts, but one I listen to is <a href="http://autoweird.fm/">@Autowired.fm</a> - a podcast about software engineering and beer hosted by <a href="https://twitter.com/holgerGP">Holger Grosse-Plankermann</a> and <a href="https://twitter.com/BenediktRitter">Benedikt Ritter</a>. 
+In this week's episode, they spoke about the fact that in <em>Maven</em> it's possible to use open range version intervals.
+In a short sentence they brought up the opinion that the usage of such open range version intervals is not very popular in Java (builds).
+I think that for most listener this sentence was very unobtrusively, but it got my attendance, because I have a strict opinion about the usage of dynamic versioning in builds.
+So I posted a short comment on <em>Twitter</em>, referencing the <em>CRISP</em> principle and noticed that at least Holger does/did not know it.
+Together with the fact that I didn't write a blog post since some weeks I decided to write about that.
+For this I'll give a quick example of defining open range version intervals (in <em>Maven</em>), before I'll write down what <em>CRISP</em> stands for.
+At the end of the article I'll write down my opinion about using open range version intervals and how I use them.</p>
+<h1 id="open-range-version-intervals">Open range version intervals</h1>
+<p>When you define your dependencies (like <em>Log4j2</em>, <em>JUnit</em> etc.) in your project, you can / must / should set a specific version.
+In the following <em>Maven</em> example the version of the <code>junit-jupiter-engine</code> dependency is set to <code>5.0.0</code>.</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+    &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
+    &lt;version&gt;5.0.0&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>With this configuration the build will always pull in the version <code>5.0.0</code>, regardless if there are newer versions published or not.
+But (at least in <em>Maven</em>) it's possible to use open range version intervals.
+In the next example we define, that we want to use at least version <code>5.0.0</code> or any newer if available:</p>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+    &lt;artifactId&gt;junit-jupiter-engine&lt;/artifactId&gt;
+    &lt;version&gt;[5.0.0,)&lt;/version&gt;
+    &lt;scope&gt;test&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p>As you can imagine, there are more ways to define versions, but that's not the focus of this post.
+If you want so get an overview what's possible in <em>Maven</em>, see the <a href="https://maven.apache.org/enforcer/enforcer-rules/versionRanges.html">Maven Version Range Specification</a> and <a href="http://www.mojohaus.org/versions-maven-plugin/">Maven Version Plugin goals</a>.</p>
+<h1 id="the-crisp-principle">The <em>CRISP</em> principle</h1>
+<p>The first time I heard of the <em>CRISP</em> principle was 2016, when I attended a training about <em>Maven</em> and <em>Jenkins</em>.
+<em>CRISP</em> stands for</p>
+<ul>
+<li><strong>Complete</strong>: A build should always run from the begining to the end.</li>
+<li><strong>Repeatable</strong>: A build with the same configuration (and same sources) should always result in the same result.</li>
+<li><strong>Informative</strong>: A build should provide information about its process and result, e.g. a log file.</li>
+<li><strong>Schedulable</strong>: A build should be scheduleable, e.g. a nightly-build, or post-commit.</li>
+<li><strong>Portable</strong>: A portable builds (and project) is independent of local files etc. Means you can check out the project and build it.</li>
+</ul>
+<p>I think the last three points are clear by themselves, so let me just add some sentences to the first two.
+The '<em>complete</em>' requirement says related to the build process itself, meaning at the end you get a valid status code if the build was succesfull or not (even when e.g. the compilation of the source code runs into an error).
+The '<em>repeatable</em>' requirement may be somehow obscure, but is exactly about versioning.
+It defines that a build with a configuration '<em>X</em>' should always result in the same result '<em>RX</em>'.
+Indirectly it says that you should strictly define your dependencies to ensure that the build does not load another version of a dependency which may behave differently and results in another outcome (which may be hard to debug as "nothing has changed".</p>
+<h1 id="future-oriented-builds">Future oriented builds</h1>
+<p>The <em>CRISP</em> principle says that you should not use open range version intervals to achieve a repeatable build.
+I think this is quite important and should apply to the main build of the project.
+But I also think that it's important to be future-aware and keep an eye on newer versions of the dependencies you use.
+So I suggest do have another build job (based on an own branch), which runs with a configuration to pull in newer versions of dependencies.
+If you use the latest version (e.g. by using an open range version interval or the '<em>LATEST</em>' value) or just newer, but not the newest version depends on the project.
+To give you two examples:</p>
+<ul>
+<li>At my work we can't use the latest version of <em>Hibernate</em> because we are bound to a JavaEE 7 application server, which does not support JPA 2.2 (but JPA 2.2 is a requirement of the latest <em>Hibernate</em> version).</li>
+<li>In the open-source-project <a href="https://junit-pioneer.org/">JUnit Pioneer</a>, an extension library for JUnit Jupiter, we have an own GithubAction-Build which pulls in newer versions of JUnit Jupiter, but not the latest.
+  We do so, because the newer version has some internal changes which breaks some of our internal test tools.
+  In <em>Pioneer</em> we decided to use the lowest JUnit Jupiter version which fits our needs to not <em>force</em> the users to update every time a new JUnit version is released.
+  Therefore, we can't use the most recent version of JUnit - which is okay for us (as we know that the library we provide also runs with newer versions).</li>
+</ul>
+<p>As a summary I again advise to have a main build with fixed versions, but another build to achieve future-awareness - depending on the projects constraints (technical or by organization).
+How do you deal with future-awareness of your projects dependencies?
+Do you use open ranged version intervals in your main build or do you have separate builds to check the compatibility?</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js" defer></script>
+        <script src="../../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
