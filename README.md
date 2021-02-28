@@ -1,6 +1,6 @@
 # Running Java
 
-This is the repository for my blog page "Running Java".
+This is the repository for my blog page ["Running Java"](https://bukama.github.io/).
 
 If you spot any mistake, please contact me or feel free to create an [issue at GitHub](https://github.com/Bukama/bukama.github.io/issues).
 
